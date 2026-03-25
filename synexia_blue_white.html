@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SYNEXIA</title>
+<meta name="color-scheme" content="light only">
+<style>:root{color-scheme:light only;}</style>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+:root{
+  --w:#ffffff;
+  --b:#0047ff;
+  --b2:#0035cc;
+  --bd:#001f7a;
+  --bl:rgba(0,71,255,.08);
+  --k:#0a0a0a;
+  --rule:#dce6ff;
+  --rulek:#e4e4e4;
+  --G:'DM Sans',sans-serif;
+  --S:'DM Serif Display',serif;
+  --J:'Noto Sans JP',sans-serif;
+}
+body{background:#ffffff;color:var(--k);font-family:var(--J);font-weight:300;overflow-x:hidden;}
+html{ background:#ffffff; }
+
+
+/* ── NAV ──────────────────────────────────────── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:999;
+  height:60px;
+  background:var(--b);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 3rem;
+}
+.logo{
+  font-family:var(--G);font-size:1rem;font-weight:700;
+  letter-spacing:.14em;text-decoration:none;color:var(--w);
+  text-transform:uppercase;
+}
+.nav-menu{display:flex;align-items:center;gap:0;list-style:none;}
+.nav-menu a{
+  font-family:var(--G);font-size:.78rem;font-weight:500;
+  letter-spacing:.06em;color:rgba(255,255,255,.85);text-decoration:none;
+  padding:0 1.4rem;height:60px;display:flex;align-items:center;
+  transition:color .15s,background .15s;
+  border-left:1px solid rgba(255,255,255,.12);
+}
+.nav-menu a:hover{color:var(--w);background:rgba(255,255,255,.08);}
+.nav-cta{
+  background:var(--w)!important;color:var(--b)!important;
+  font-weight:700!important;
+  transition:opacity .15s!important;
+}
+.nav-cta:hover{opacity:.9!important;}
+
+/* ── HERO ─────────────────────────────────────── */
+#hero{
+  padding-top:60px;
+  background:var(--b);
+  min-height:100vh;
+  display:grid;grid-template-rows:1fr auto;
+}
+.hero-main{
+  display:grid;grid-template-columns:1fr 340px;
+}
+.hero-left{
+  padding:6rem 3rem 4rem;
+  border-right:1px solid rgba(255,255,255,.12);
+  display:flex;flex-direction:column;justify-content:flex-end;
+}
+.hero-eyebrow{
+  font-family:var(--G);font-size:.68rem;font-weight:600;
+  letter-spacing:.24em;text-transform:uppercase;
+  color:rgba(255,255,255,.9);
+  margin-bottom:2rem;
+  display:flex;align-items:center;gap:.7rem;
+  opacity:0;animation:fd .5s .1s ease forwards;
+}
+.hero-eyebrow::before{content:'';width:24px;height:1px;background:rgba(255,255,255,.4);}
+
+h1{
+  font-family:var(--S);
+  font-size:clamp(4.5rem,10vw,10rem);
+  font-weight:700;line-height:.92;letter-spacing:-.02em;
+  color:var(--w);margin-bottom:2.5rem;
+}
+h1 .row{display:block;overflow:hidden;}
+h1 .row span{
+  display:block;
+  transform:translateY(110%);opacity:0;
+  animation:up .8s cubic-bezier(.16,1,.3,1) forwards;
+}
+h1 .row:nth-child(1) span{animation-delay:.05s;}
+h1 .row:nth-child(2) span{animation-delay:.18s;}
+h1 .row:nth-child(3) span{animation-delay:.31s;}
+h1 em{font-style:italic;color:rgba(255,255,255,.55);}
+@keyframes up{to{transform:none;opacity:1;}}
+@keyframes fd{to{opacity:1;}}
+
+.hero-desc{
+  font-family:var(--J);font-size:.95rem;
+  color:rgba(255,255,255,.9);line-height:2.1;
+  max-width:460px;margin-bottom:2.8rem;
+  border-left:2px solid rgba(255,255,255,.3);padding-left:1.2rem;
+  opacity:0;animation:fd .5s .5s ease forwards;
+}
+.hero-btns{
+  display:flex;gap:.8rem;
+  opacity:0;animation:fd .5s .65s ease forwards;
+}
+.btn-w{
+  background:var(--w);color:var(--k);
+  padding:.9rem 2.4rem;text-decoration:none;
+  font-family:var(--G);font-size:.82rem;font-weight:700;letter-spacing:.04em;
+  transition:opacity .15s;
+}
+.btn-w:hover{opacity:.9;}
+.btn-ghost{
+  border:1px solid rgba(255,255,255,.3);color:var(--w);
+  padding:.9rem 2.4rem;text-decoration:none;
+  font-family:var(--G);font-size:.82rem;font-weight:500;letter-spacing:.04em;
+  transition:border-color .15s,background .15s;
+}
+.btn-ghost:hover{border-color:rgba(255,255,255,.7);background:rgba(255,255,255,.08);}
+
+/* Right panel */
+.hero-right{
+  display:flex;flex-direction:column;
+  opacity:0;animation:fd .5s .4s ease forwards;
+}
+.hr-row{
+  flex:1;padding:1.8rem 2rem;
+  border-bottom:1px solid rgba(255,255,255,.1);
+  transition:background .15s;
+}
+.hr-row:last-child{border-bottom:none;}
+.hr-row:hover{background:rgba(255,255,255,.06);}
+.hr-status{
+  font-family:var(--G);font-size:.58rem;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;
+  display:flex;align-items:center;gap:.4rem;margin-bottom:.5rem;
+}
+.hr-status.live{color:#7dffb0;}
+.hr-status.soon{color:rgba(255,255,255,.3);}
+.dp{width:5px;height:5px;border-radius:50%;background:#7dffb0;animation:blink 1.5s ease infinite;}
+.dm{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.2);}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.2;}}
+.hr-name{font-family:var(--S);font-size:1.1rem;color:var(--w);margin-bottom:.2rem;}
+.hr-sub{font-family:var(--J);font-size:.7rem;color:rgba(255,255,255,.75);}
+.hr-link{font-family:var(--G);font-size:.65rem;font-weight:600;letter-spacing:.06em;color:rgba(255,255,255,.85);text-decoration:none;margin-top:.4rem;display:inline-block;}
+.hr-link:hover{color:var(--w);}
+
+/* Hero foot */
+.hero-foot{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border-top:1px solid rgba(255,255,255,.12);
+}
+.hf{
+  padding:1.6rem 3rem;border-right:1px solid rgba(255,255,255,.12);
+  display:flex;align-items:center;gap:.8rem;
+}
+.hf:last-child{border-right:none;}
+.hf-val{font-family:var(--S);font-style:italic;font-size:1.5rem;color:var(--w);}
+.hf-lab{font-family:var(--G);font-size:.65rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.75);}
+
+/* ── WHITE SECTIONS ───────────────────────────── */
+.s-tag{
+  font-family:var(--G);font-size:.62rem;font-weight:700;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--k);
+  margin-bottom:1.2rem;display:flex;align-items:center;gap:.6rem;
+}
+.s-tag::before{content:'';width:20px;height:1px;background:var(--b);}
+h2{
+  font-family:var(--S);font-size:clamp(2.8rem,5.5vw,6rem);
+  font-weight:700;line-height:.92;letter-spacing:-.02em;color:var(--k);
+}
+h2 em{font-style:italic;color:var(--b);}
+
+/* ── TICKER ───────────────────────────────────── */
+.ticker{overflow:hidden;padding:.6rem 0;background:var(--k);}
+.ticker-t{
+  display:flex;gap:5rem;white-space:nowrap;
+  animation:tick 20s linear infinite;
+  font-family:var(--G);font-size:.68rem;font-weight:600;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--k);
+}
+.ticker-t .hi{color:var(--b);}
+@keyframes tick{to{transform:translateX(-50%);}}
+
+/* ── ABOUT ────────────────────────────────────── */
+#about{
+  display:grid;grid-template-columns:1fr 1fr;
+  border-bottom:1px solid var(--rulek);
+  background:#ffffff;
+}
+#services{ background:#ffffff; }
+#benefits{ background:#ffffff; }
+#company{ background:#ffffff; }
+#contact .con-r{ background:#ffffff; }
+.ab-l{padding:6rem 3rem;border-right:1px solid var(--rulek);}
+.ab-l h2{margin-bottom:2.5rem;}
+.ab-l p{font-family:var(--J);font-size:.92rem;color:var(--k);line-height:2.1;margin-bottom:1rem;}
+.ab-r{display:grid;grid-template-columns:1fr 1fr;}
+.ab-box{
+  padding:3rem 2.5rem;
+  border-right:1px solid var(--rulek);border-bottom:1px solid var(--rulek);
+  display:flex;flex-direction:column;justify-content:space-between;min-height:160px;
+  transition:background .15s;
+}
+.ab-box:nth-child(even){border-right:none;}
+.ab-box:nth-child(3),.ab-box:nth-child(4){border-bottom:none;}
+.ab-box:hover{background:var(--bl);}
+.ab-lbl{font-family:var(--G);font-size:.6rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--b);}
+.ab-word{font-family:var(--S);font-size:2.2rem;font-style:italic;font-weight:700;color:var(--k);}
+.ab-word.blue{color:var(--b);}
+
+/* ── SERVICES ─────────────────────────────────── */
+#services{border-bottom:1px solid var(--rulek);}
+.srv-hd{
+  display:grid;grid-template-columns:1fr 1fr;
+  border-bottom:1px solid var(--rulek);
+}
+.srv-hd-l{padding:5rem 3rem;border-right:1px solid var(--rulek);}
+.srv-hd-r{padding:5rem 3rem;display:flex;align-items:flex-end;}
+.srv-hd-r p{font-family:var(--J);font-size:.92rem;color:var(--k);line-height:2;max-width:380px;}
+
+.srv-row{
+  display:grid;grid-template-columns:56px 1fr 1fr 72px;
+  border-bottom:1px solid var(--rulek);transition:background .15s;
+}
+.srv-row:last-child{border-bottom:none;}
+.srv-row:hover{background:var(--bl);}
+.srv-n{
+  border-right:1px solid var(--rulek);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--G);font-size:.6rem;font-weight:600;
+  letter-spacing:.1em;color:var(--b);writing-mode:vertical-rl;
+}
+.srv-body{padding:3rem;border-right:1px solid var(--rulek);}
+.srv-name{font-family:var(--S);font-size:3rem;font-style:italic;font-weight:700;line-height:1;margin-bottom:.4rem;}
+.srv-en{font-family:var(--G);font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--b);margin-bottom:1.2rem;}
+.srv-desc{font-family:var(--J);font-size:.84rem;color:var(--k);line-height:2;}
+.srv-a{display:inline-flex;align-items:center;gap:.3rem;margin-top:.8rem;font-family:var(--G);font-size:.7rem;font-weight:600;letter-spacing:.06em;color:var(--b);text-decoration:none;}
+.srv-a:hover{text-decoration:underline;}
+.srv-feats{padding:3rem 2.5rem;border-right:1px solid var(--rulek);list-style:none;display:flex;flex-direction:column;justify-content:center;}
+.srv-feats li{font-family:var(--J);font-size:.8rem;color:var(--k);padding:.45rem 0;border-bottom:1px solid var(--rulek);display:flex;align-items:center;gap:.6rem;}
+.srv-feats li:last-child{border-bottom:none;}
+.srv-feats li::before{content:'—';color:var(--b);font-size:.75rem;flex-shrink:0;}
+.srv-badge{display:flex;align-items:center;justify-content:center;padding:1.5rem;}
+.badge{writing-mode:vertical-rl;font-family:var(--G);font-size:.56rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:.5rem .3rem;border:1px solid;}
+.b-live{border-color:#18a558;color:#18a558;}
+.b-soon{border-color:rgba(0,71,255,.3);color:rgba(0,71,255,.4);}
+
+/* ── BENEFITS ─────────────────────────────────── */
+#benefits{
+  display:grid;grid-template-columns:1fr 1fr 1fr 1fr;
+  border-bottom:1px solid var(--rulek);
+}
+/* Benefits header spans full width */
+.ben-head{
+  grid-column:1/-1;padding:4rem 3rem 3rem;
+  border-bottom:1px solid var(--rulek);
+  display:flex;align-items:flex-end;justify-content:space-between;
+}
+.ben-head p{font-family:var(--J);font-size:.92rem;color:var(--k);line-height:2;max-width:380px;}
+.ben-item{
+  padding:3rem 2.5rem;border-right:1px solid var(--rulek);
+  transition:background .15s;
+}
+.ben-item:last-child{border-right:none;}
+.ben-item:hover{background:var(--bl);}
+.bn{font-family:var(--G);font-size:.6rem;font-weight:700;letter-spacing:.2em;color:var(--b);margin-bottom:1.5rem;}
+.bt{font-family:var(--S);font-size:1.2rem;font-weight:700;color:var(--k);margin-bottom:.8rem;line-height:1.2;}
+.bd{font-family:var(--J);font-size:.8rem;color:var(--k);line-height:1.9;}
+
+/* ── FLOW — blue background ───────────────────── */
+#flow{background:var(--b);border-bottom:none;}
+.flow-hd{
+  padding:4rem 3rem;border-bottom:1px solid rgba(255,255,255,.12);
+  display:flex;align-items:flex-end;justify-content:space-between;
+}
+.flow-hd .s-tag{color:rgba(255,255,255,.85);}
+.flow-hd .s-tag::before{background:rgba(255,255,255,.4);}
+.flow-hd h2{color:var(--w);}
+.flow-hd h2 em{color:rgba(255,255,255,.9);}
+.flow-steps{display:grid;grid-template-columns:repeat(4,1fr);}
+.fs{
+  padding:3.5rem 3rem;border-right:1px solid rgba(255,255,255,.12);
+  position:relative;transition:background .15s;
+}
+.fs:last-child{border-right:none;}
+.fs:hover{background:rgba(255,255,255,.05);}
+.fn{font-family:var(--S);font-size:5rem;font-style:italic;font-weight:700;line-height:1;color:rgba(255,255,255,.12);margin-bottom:2rem;}
+.ft{font-family:var(--S);font-size:1.4rem;font-weight:700;color:var(--w);margin-bottom:.6rem;}
+.fd{font-family:var(--J);font-size:.8rem;color:rgba(255,255,255,.9);line-height:1.85;}
+.farr{
+  position:absolute;right:-10px;top:3.5rem;
+  width:18px;height:18px;background:var(--b);
+  border:1px solid rgba(255,255,255,.4);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.65rem;color:rgba(255,255,255,.7);z-index:1;
+}
+.fs:last-child .farr{display:none;}
+
+/* ── COMPANY ──────────────────────────────────── */
+#company{
+  display:grid;grid-template-columns:1fr 1fr;
+  border-top:1px solid var(--rulek);border-bottom:1px solid var(--rulek);
+}
+.co-l{padding:6rem 3rem;border-right:1px solid var(--rulek);}
+.co-r{padding:6rem 3rem;}
+table{width:100%;border-collapse:collapse;}
+tr{border-bottom:1px solid var(--rulek);}
+td{padding:1.2rem 0;font-family:var(--J);font-size:.88rem;color:var(--k);line-height:1.9;vertical-align:top;}
+td:first-child{font-family:var(--G);font-size:.62rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--b);width:140px;padding-top:1.4rem;}
+
+/* ── CONTACT ──────────────────────────────────── */
+#contact{
+  display:grid;grid-template-columns:1fr 1fr;min-height:55vh;
+  background:var(--w);
+}
+.con-l{
+  padding:5rem 3rem;border-right:1px solid var(--rulek);
+  background:var(--b);
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.con-l .s-tag{color:rgba(255,255,255,.75);}
+.con-l .s-tag::before{background:rgba(255,255,255,.3);}
+.con-l h2{color:var(--w);margin-bottom:2rem;}
+.con-l h2 em{color:rgba(255,255,255,.9);}
+.con-email{
+  display:block;font-family:var(--S);font-style:italic;
+  font-size:clamp(1.6rem,3vw,3rem);font-weight:700;
+  color:var(--w);text-decoration:none;line-height:1.1;
+  transition:opacity .2s;
+}
+.con-email:hover{opacity:.75;}
+.con-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:2rem;}
+.chip{
+  border:1px solid rgba(255,255,255,.2);padding:.38rem .9rem;
+  font-family:var(--G);font-size:.65rem;font-weight:500;letter-spacing:.06em;
+  color:rgba(255,255,255,.85);transition:border-color .15s,color .15s;cursor:default;
+}
+.chip:hover{border-color:rgba(255,255,255,.9);color:var(--w);}
+.con-r{padding:5rem 3rem;display:flex;flex-direction:column;justify-content:center;gap:1.5rem;}
+.con-r p{font-family:var(--J);font-size:.92rem;color:var(--k);line-height:2.1;}
+.con-r .btn-b2{
+  align-self:flex-start;margin-top:1rem;
+  background:var(--b);color:var(--w);
+  padding:.9rem 2.4rem;text-decoration:none;
+  font-family:var(--G);font-size:.82rem;font-weight:700;letter-spacing:.04em;
+  transition:background .15s;
+}
+.con-r .btn-b2:hover{background:var(--b2);}
+
+/* ── FOOTER ───────────────────────────────────── */
+footer{
+  background:var(--b);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.4rem 3rem;
+}
+.fl{font-family:var(--G);font-size:.9rem;font-weight:700;letter-spacing:.12em;color:var(--w);}
+.fr{font-family:var(--G);font-size:.65rem;letter-spacing:.06em;color:rgba(255,255,255,.6);}
+
+/* ── REVEAL ───────────────────────────────────── */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;}
+.rv-l{opacity:0;transform:translateX(-18px);transition:opacity .6s ease,transform .6s ease;}
+.rv-r{opacity:0;transform:translateX(18px);transition:opacity .6s ease,transform .6s ease;}
+.rv.on,.rv-l.on,.rv-r.on{opacity:1;transform:none;}
+
+/* ── MOBILE ───────────────────────────────────── */
+@media(max-width:860px){
+  nav{padding:0 1.5rem;}
+  .nav-menu a{padding:0 .8rem;}
+  .hero-main{grid-template-columns:1fr;}
+  .hero-right{display:none;}
+  .hero-left{padding:3rem 1.5rem;}
+  h1{font-size:4rem;}
+  .hero-foot{grid-template-columns:1fr 1fr 1fr;}
+  .hf{padding:1.2rem 1.5rem;}
+  #about,#company,#contact{grid-template-columns:1fr;}
+  .ab-l,.co-l,.con-l{border-right:none;border-bottom:1px solid var(--rulek);}
+  .ab-r{grid-template-columns:1fr 1fr;}
+  .srv-hd{grid-template-columns:1fr;}
+  .srv-hd-l{border-right:none;border-bottom:1px solid var(--rulek);}
+  .srv-row{grid-template-columns:1fr;}
+  .srv-n,.srv-badge{display:none;}
+  .srv-body,.srv-feats{border-right:none;border-bottom:1px solid var(--rulek);padding:2rem 1.5rem;}
+  #benefits{grid-template-columns:1fr 1fr;}
+  .ben-item{border-bottom:1px solid var(--rulek);}
+  .flow-steps{grid-template-columns:1fr 1fr;}
+  .farr{display:none;}
+  footer{flex-direction:column;gap:.5rem;padding:1.4rem 1.5rem;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">SYNEXIA</a>
+  <ul class="nav-menu">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#company">Company</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-main">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Technology Company — 2025</div>
+      <h1>
+        <span class="row"><span>AIと</span></span>
+        <span class="row"><span><em>データ</em>で、</span></span>
+        <span class="row"><span>進化する。</span></span>
+      </h1>
+      <p class="hero-desc">混雑可視化サービスを軸に、AI領域へ展開するテクノロジー企業。リアルデータでビジネスの非効率を解消します。</p>
+      <div class="hero-btns">
+        <a href="#services" class="btn-w">サービスを見る →</a>
+        <a href="#contact" class="btn-ghost">お問い合わせ</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hr-row">
+        <div class="hr-status live"><span class="dp"></span>Live</div>
+        <div class="hr-name">リアル混雑ナビ</div>
+        <div class="hr-sub">店舗・施設の混雑をリアルタイム可視化</div>
+        <a href="https://miyazaki-navi.jp" target="_blank" class="hr-link">miyazaki-navi.jp ↗</a>
+      </div>
+      <div class="hr-row">
+        <div class="hr-status soon"><span class="dm"></span>Coming Soon</div>
+        <div class="hr-name">AI開発</div>
+        <div class="hr-sub">業務効率化・自動化AIシステム</div>
+      </div>
+      <div class="hr-row">
+        <div class="hr-status soon"><span class="dm"></span>Coming Soon</div>
+        <div class="hr-name">AIコンサルティング</div>
+        <div class="hr-sub">企画から運用まで一気通貫</div>
+      </div>
+      <div class="hr-row">
+        <div class="hr-status live"><span class="dp"></span>Available</div>
+        <div class="hr-name">Web制作</div>
+        <div class="hr-sub">Webサイト・システム構築</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-foot">
+    <div class="hf"><div class="hf-val">Real-time</div><div class="hf-lab">混雑可視化</div></div>
+    <div class="hf"><div class="hf-val">AI</div><div class="hf-lab">開発・コンサル</div></div>
+    <div class="hf"><div class="hf-val">Web</div><div class="hf-lab">制作・システム</div></div>
+  </div>
+</section>
+
+<div class="ticker">
+  <div class="ticker-t">
+    <span class="hi">混雑可視化</span><span>/</span><span>AI Development</span><span>/</span><span>AI Consulting</span><span>/</span><span class="hi">Web Design</span><span>/</span><span>Real-time Data</span><span>/</span><span class="hi">SYNEXIA</span><span>/</span>
+    <span class="hi">混雑可視化</span><span>/</span><span>AI Development</span><span>/</span><span>AI Consulting</span><span>/</span><span class="hi">Web Design</span><span>/</span><span>Real-time Data</span><span>/</span><span class="hi">SYNEXIA</span><span>/</span>
+  </div>
+</div>
+
+<section id="about">
+  <div class="ab-l rv-l">
+    <div class="s-tag">About</div>
+    <h2>非効率を、<br><em>データで</em><br>解決する。</h2>
+    <br><br>
+    <p>SYNEXIAは、リアルデータを活用し、ビジネスの非効率を解消するテクノロジー企業です。</p>
+    <p>現在は混雑可視化サービスを提供し、今後はAI開発・AIコンサルティング領域へ展開予定です。</p>
+  </div>
+  <div class="ab-r rv-r">
+    <div class="ab-box"><div class="ab-lbl">リアルタイム可視化</div><div class="ab-word blue">Real</div></div>
+    <div class="ab-box"><div class="ab-lbl">AI開発・コンサル</div><div class="ab-word">AI</div></div>
+    <div class="ab-box"><div class="ab-lbl">Web制作</div><div class="ab-word blue">Web</div></div>
+    <div class="ab-box"><div class="ab-lbl">テクノロジー企業</div><div class="ab-word">Tech</div></div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="srv-hd">
+    <div class="srv-hd-l rv"><div class="s-tag">Services</div><h2>提供<br><em>サービス</em></h2></div>
+    <div class="srv-hd-r rv"><p>データとAIの力でビジネスの課題を解決する、3つのサービスを展開しています。</p></div>
+  </div>
+  <div class="srv-row rv">
+    <div class="srv-n">01</div>
+    <div class="srv-body">
+      <div class="srv-name">リアル混雑ナビ</div>
+      <div class="srv-en">Real-time Congestion Visualization</div>
+      <div class="srv-desc">店舗や施設の混雑状況をリアルタイムで可視化。ワンタップ更新で来店機会を最大化します。</div>
+      <a href="https://miyazaki-navi.jp" target="_blank" class="srv-a">miyazaki-navi.jp ↗</a>
+    </div>
+    <ul class="srv-feats">
+      <li>ワンタップで混雑更新</li><li>待ち時間の事前把握</li><li>来店機会の最大化</li><li>AIによる混雑予測（近日）</li><li>カメラ連携（近日）</li>
+    </ul>
+    <div class="srv-badge"><span class="badge b-live">Live</span></div>
+  </div>
+  <div class="srv-row rv">
+    <div class="srv-n">02</div>
+    <div class="srv-body">
+      <div class="srv-name">AI開発</div>
+      <div class="srv-en">AI System Development</div>
+      <div class="srv-desc">業務効率化・自動化を実現するAIシステムの開発を予定しています。</div>
+    </div>
+    <ul class="srv-feats"><li>混雑予測AI</li><li>画像解析（人数カウント）</li><li>データ分析</li></ul>
+    <div class="srv-badge"><span class="badge b-soon">Soon</span></div>
+  </div>
+  <div class="srv-row rv">
+    <div class="srv-n">03</div>
+    <div class="srv-body">
+      <div class="srv-name">AIコンサルティング</div>
+      <div class="srv-en">AI Consulting</div>
+      <div class="srv-desc">AI導入の企画から運用まで一気通貫で支援します。</div>
+    </div>
+    <ul class="srv-feats"><li>業務分析</li><li>AI導入設計</li><li>ツール選定</li><li>運用改善</li></ul>
+    <div class="srv-badge"><span class="badge b-soon">Soon</span></div>
+  </div>
+</section>
+
+<section id="benefits">
+  <div class="ben-head rv">
+    <div>
+      <div class="s-tag">Benefits</div>
+      <h2>導入<em>メリット</em></h2>
+    </div>
+    <p>データを活用することで売上・運営効率・顧客体験のすべてを同時に改善します。</p>
+  </div>
+  <div class="ben-item rv"><div class="bn">01</div><div class="bt">売上機会の最大化</div><div class="bd">混雑情報の可視化で来店タイミングを最適化し、売上機会を逃しません。</div></div>
+  <div class="ben-item rv"><div class="bn">02</div><div class="bt">待ち時間による離脱防止</div><div class="bd">事前に混雑状況を把握できるため、顧客の離脱を防ぎます。</div></div>
+  <div class="ben-item rv"><div class="bn">03</div><div class="bt">業務効率化</div><div class="bd">データに基づく運営判断でスタッフ配置などの業務を効率化します。</div></div>
+  <div class="ben-item rv"><div class="bn">04</div><div class="bt">データに基づく意思決定</div><div class="bd">蓄積されたリアルデータを活用し、精度の高いビジネス判断を支援します。</div></div>
+</section>
+
+<section id="flow">
+  <div class="flow-hd rv">
+    <div><div class="s-tag">How it works</div><h2>導入の<em>流れ</em></h2></div>
+  </div>
+  <div class="flow-steps">
+    <div class="fs rv"><div class="fn">01</div><div class="ft">お問い合わせ</div><div class="fd">メールからお気軽にご連絡ください。</div><div class="farr">›</div></div>
+    <div class="fs rv"><div class="fn">02</div><div class="ft">ヒアリング</div><div class="fd">課題やご要望をお伺いし、最適なプランをご提案します。</div><div class="farr">›</div></div>
+    <div class="fs rv"><div class="fn">03</div><div class="ft">導入・設定</div><div class="fd">スムーズな導入をサポートします。</div><div class="farr">›</div></div>
+    <div class="fs rv"><div class="fn">04</div><div class="ft">運用開始</div><div class="fd">導入後も継続的にサポートします。</div></div>
+  </div>
+</section>
+
+<section id="company">
+  <div class="co-l rv-l"><div class="s-tag">Company</div><h2>会社<br><em>概要</em></h2></div>
+  <div class="co-r rv-r">
+    <table>
+      <tr><td>会社名</td><td>SYNEXIA</td></tr>
+      <tr><td>代表</td><td>橋本 光大郎</td></tr>
+      <tr><td>事業内容</td><td>混雑可視化サービス<br>AI開発（準備中）<br>AIコンサルティング（準備中）<br>Web制作</td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="con-l rv-l">
+    <div><div class="s-tag">Contact</div><h2><em>お問い</em><br>合わせ</h2></div>
+    <a href="/cdn-cgi/l/email-protection#acdfd5c2c9d4c5cd82c3cacac5cfc5cdc0eccbc1cdc5c082cfc3c1" class="con-email">synexia.official<br>@gmail.com</a>
+    <div class="con-chips">
+      <span class="chip">導入相談</span>
+      <span class="chip">AIに関する相談</span>
+      <span class="chip">パートナーシップ</span>
+    </div>
+  </div>
+  <div class="con-r rv-r">
+    <p>サービス導入やAIに関するご相談、パートナーシップについてなど、お気軽にお問い合わせください。</p>
+    <p>AI開発・AIコンサルティングに関するご相談も先行受付中です。</p>
+    <a href="/cdn-cgi/l/email-protection#33404a5d564b5a521d5c55555a505a525f73545e525a5f1d505c5e" class="btn-b2">メールを送る →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="fl">SYNEXIA</div>
+  <div class="fr">© 2025 SYNEXIA. All rights reserved.</div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+d
